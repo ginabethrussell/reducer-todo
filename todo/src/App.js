@@ -10,12 +10,30 @@ import styled from 'styled-components';
 
 const TitleH1 = styled.h1`
   font-weight: normal;
-  `
+  font-size: 4rem;
+  width: 100%;
+  padding: 16px 16px;
+  color: #918EF4;
+  margin-bottom: 0;
+  `;
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  `;
 const Button = styled.button`
-  font-weight: 18px;
-  padding: 5px 8px;
-  text-transform: uppercase;`
-  ;
+  width: 200px;
+  margin-left: auto;
+  font-size: 1.8rem;
+  font-weight: normal;
+  padding: 8px 8px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background-color: #FFF;
+  color: #000;
+  cursor: pointer;
+`;
+
   
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -25,7 +43,9 @@ function App() {
       <TitleH1>ToDo List</TitleH1>
       <TodoForm dispatch={dispatch} actions={actions}/>
       <TodoList dispatch={dispatch} todos={state.todos} actions={actions}/>
-      <Button onClick={() => dispatch(actions.clearTodo())}>Clear Completed</Button>
+      <ButtonDiv>
+        <Button onClick={() => dispatch(actions.clearTodo())}>Clear Completed</Button>
+      </ButtonDiv>
     </div>
   );
 }
