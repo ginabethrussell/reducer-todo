@@ -17,9 +17,6 @@ const Button = styled.button`
   
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { addTodo, editTodo, clearTodo, completeTodo, deleteTodo } = actions;
-
-
   
   return (
     <div className="App">

@@ -17,7 +17,7 @@ export default function TodoForm(props) {
     const submitTodo = (e) => {
         e.preventDefault();
         if (formValue !== ''){
-            dispatch(actions.addTodo(formValue))
+            dispatch(actions.addTodo(formValue));
             clearForm();
         } 
     }

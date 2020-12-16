@@ -8,6 +8,7 @@ export { ADD_TODO, DELETE_TODO, CLEAR_TODO, COMPLETE_TODO, EDIT_TODO };
 
 export default {
     addTodo: (newItem) => {
+        console.log('Adding todo', newItem);
         return ({ type: ADD_TODO, payload: newItem })
     },
     deleteTodo: (itemId) => {
@@ -16,7 +17,7 @@ export default {
     completeTodo: (itemId) => {
         return ({ type: COMPLETE_TODO, payload: itemId })
     },
-    editTodo: (editedItem, itemId) => {
+    editTodo: (itemId, editedItem) => {
         return ({ type: EDIT_TODO, payload: {editedItem: editedItem, itemId: itemId}})
     },
     clearTodo: () => {

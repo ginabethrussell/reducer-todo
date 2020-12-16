@@ -19,7 +19,7 @@ const Input = styled.input`
     font-size: 18px;`;
 
 export default function Todo(props) {
-    const { todo, deleteTodos, markComplete, editTodos } = props;
+    const { todo, dispatch, actions } = props;
     const [isEditing, setIsEditing] = useState(false);
     const [formValue, handleChange, clearForm] = useForm('');
 
@@ -29,7 +29,7 @@ export default function Todo(props) {
 
     const submitUpdate = ()=> {
         if (formValue !== ''){
-            editTodos(todo.id, formValue, 'EDIT');
+            dispatch(actions.editTodos(todo.id, formValue));
             clearForm();
         }  
         setIsEditing(!isEditing);
@@ -38,14 +38,14 @@ export default function Todo(props) {
 
     return (
         <TodoDiv>  
-            <TodoItemH3 onClick={() => markComplete(todo.id, 'COMPLETED')} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
+            <TodoItemH3 onClick={() => dispatch(actions.completeTodo(todo.id))} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
             {isEditing? <div className='editTodo'>
                     <Input type='text' name='edit' value={formValue} onChange={(e) => handleChange(e.target.value)}/>
                     <Button onClick={submitUpdate}>Update</Button>
                 </div>: null}
             {!isEditing? <Button onClick={() => editTodo() }>Edit</Button>: null}
            
-            <Button onClick={() => deleteTodos(todo.id, 'DELETE')}>Delete</Button>
+            <Button onClick={() => dispatch(actions.deleteTodo(todo.id))}>Delete</Button>
         </TodoDiv>
     )
 }
