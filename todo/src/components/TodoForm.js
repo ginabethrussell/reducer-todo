@@ -21,12 +21,11 @@ export default function TodoForm(props) {
     const submitTodo = (e) => {
         e.preventDefault();
         if (formValues.todo !== ''){
-            console.log(formValues)
             dispatch(actions.addTodo(formValues.todo, formValues.dueDate));
             clearForm();
         } 
     }
-    console.log(formValues);
+ 
     return(
         <form className='add-todo-form' onSubmit={submitTodo}>
             <TodoInput type='text'

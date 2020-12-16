@@ -34,16 +34,16 @@ export default function Todo(props) {
 
     const initialValues = {
         editedItem: '',
-        dueDate: todo.completedBy
+        dueDate: ''
     }
     const [formValues, handleChange, clearForm] = useForm(initialValues);
     const [overdue, setOverdue] = useState(false);
     
     useEffect(() => {
-    
-        if (todo.completedBy !== '' && moment(todo.completedBy).format('LL') < moment(Date.now()).format('LL')){
-            console.log('Overdue');
+        if (moment(todo.completedBy).format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')){
             setOverdue(true);
+        }else {
+            setOverdue(false);
         }
         if (todo.completed === true){
             setOverdue(false);
@@ -56,11 +56,21 @@ export default function Todo(props) {
 
     const submitUpdate = (e)=> {
         e.preventDefault();
-        console.log('formValues.dueDate', formValues.dueDate)
+        let newDueDate = '';
+        if (formValues.dueDate !== ''){
+            newDueDate = formValues.dueDate;
+        }else {
+            newDueDate = todo.completedBy;
+        }
+        let newTodo = '';
         if (formValues.editedItem !== ''){
-            dispatch(actions.editTodo(todo.id, formValues.editedItem, formValues.dueDate || todo.completedBy));
-            clearForm();
-        }  
+            newTodo = formValues.editedItem;
+        }else {
+            newTodo = todo.item;
+        }
+        dispatch(actions.editTodo(todo.id, newTodo, newDueDate));
+        clearForm();
+        
         setIsEditing(!isEditing);
     }
    

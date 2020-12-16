@@ -4,7 +4,6 @@ export default function useForm (initialFormValues) {
     const [formValue, setFormValue] = useState(initialFormValues);
 
     const handleChange = (name, value) => {
-        console.log(name, value);
         setFormValue({...formValue, [name]: value})
     }
 
