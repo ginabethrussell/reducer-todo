@@ -1,4 +1,4 @@
-import TodoList from "../components/TodoList";
+import todoActions, { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, CLEAR_TODO } from '../actions/todoActions';
 
 const initialTodos = [{
     item: 'Learn about reducers',
@@ -30,11 +30,16 @@ const initialTodos = [{
 const reducer = (state, action) => {
     console.log('reducing', state, action.type, action.payload)
     switch (action.type) {
-        case 'ADD_TODO':
-            return [...state, action.payload]
-        case 'DELETE':
+        case(ADD_TODO):
+            const newTodo = {
+                item: action.payload,
+                completed: false,
+                id: Date.now()
+            };
+            return [...state, newTodo];
+        case(DELETE_TODO):
             return state.filter(item => item.id != action.payload)
-        case 'COMPLETED':
+        case(COMPLETE_TODO):
             console.log('completed case', state, action.payload)
             return state.map(item => {
                 if(item.id === action.payload) {
@@ -42,14 +47,14 @@ const reducer = (state, action) => {
                 };
                 return item;
             })
-        case 'EDIT':
+        case(EDIT_TODO):
             return state.map(item => {
                 if(item.id === action.payload.todoId) {
                    return {...item, item: action.payload.newItem}
                 };
                 return item;
             });
-        case 'CLEAR':
+        case(CLEAR_TODO):
             return state.filter(item => {
                 return !item.completed
             })
@@ -59,4 +64,3 @@ const reducer = (state, action) => {
 }
 
 export {initialTodos, reducer};
-// payload: {todoId: todoId, newItem: newItem}

@@ -1,36 +1,32 @@
 import './App.css';
 import React, {useReducer} from 'react';
-import {initialTodos, reducer} from './reducers/reducer';
+import { initialTodos, reducer } from './reducers/reducer';
+import actions from './actions/todoActions';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+
+import styled from 'styled-components';
+
+const TitleH1 = styled.h1`
+  font-weight: normal;
+  `
+const Button = styled.button`
+  font-weight: 18px;`
+  ;
+  
 function App() {
   const [todos, dispatch] = useReducer(reducer, initialTodos);
+  const { addTodo, editTodo, clearTodo, completeTodo, deleteTodo } = actions;
 
-  const addTodos = (newTodo, action) => {
-    console.log('adding', newTodo, action);
-    dispatch({type: action, payload: newTodo})
-  }
-  const deleteTodos = (todoId, action) => {
-    console.log(todoId, action);
-    dispatch({ type: action, payload: todoId });
-  }
-  const markComplete = (todoId, action) => {
-    console.log(todoId, action);
-    dispatch({ type: action, payload: todoId });
-  }
-  const editTodos = (todoId, newItem, action) =>{
-    dispatch({type: action, payload: {todoId: todoId, newItem: newItem}})
-  }
-  const clearCompletedTodos = () => {
-    dispatch({type: "CLEAR"})
-  }
+
+  
   return (
     <div className="App">
-      <h1>My Todo List</h1>
-      <TodoList deleteTodos={deleteTodos} markComplete={markComplete} editTodos={editTodos} clearCompletedTodos={clearCompletedTodos} todos={todos} />
-      <TodoForm addTodos={addTodos} />
-      <button onClick={clearCompletedTodos}>Clear Completed</button>
+      <TitleH1>ToDo List</TitleH1>
+      <TodoForm dispatch={dispatch} actions={actions}/>
+      <TodoList dispatch={dispatch} todos={todos} actions={actions}/>
+      <Button onClick=''>Clear Completed</Button>
     </div>
   );
 }

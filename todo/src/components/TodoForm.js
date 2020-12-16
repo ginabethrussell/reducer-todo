@@ -1,30 +1,34 @@
 import React from 'react';
 import useForm from '../hooks/useForm';
+import styled from 'styled-components';
+
+const TodoInput = styled.input`
+    width: 70%;
+    font-size: 18px;
+`;
+const AddButton = styled.button`
+    font-size: 18px;  
+`;
 
 export default function TodoForm(props) {
     const [formValue, handleChange, clearForm] = useForm();
-    const { addTodos } = props;
+    const { dispatch, actions } = props;
 
     const submitTodo = (e) => {
         e.preventDefault();
         if (formValue !== ''){
-            const newTodo = {
-                item: formValue,
-                completed: false,
-                id: Date.now()
-            }
-            addTodos(newTodo, 'ADD_TODO');
+            dispatch(actions.addTodo(formValue))
             clearForm();
         } 
     }
     return(
-        <form onClick={submitTodo}>
-            <input type='text'
+        <form className='add-todo-form' onClick={submitTodo}>
+            <TodoInput type='text'
             name='todo'
             value={formValue}
             onChange={(e) => handleChange(e.target.value)}
             />
-            <button type='submit'>Add Todo</button>
+            <AddButton type='submit'>Add Todo</AddButton>
         </form>
     )
 }
