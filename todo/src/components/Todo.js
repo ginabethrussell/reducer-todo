@@ -28,25 +28,27 @@ const OverdueP = styled.p`
     text-transform: uppercase;
     margin: 0 10px 0 10px `;
 
-const initialValue = {
-    editedItem: ''
-}
 export default function Todo(props) {
     const { todo, dispatch, actions } = props;
     const [isEditing, setIsEditing] = useState(false);
-    const [formValue, handleChange, clearForm] = useForm(initialValue);
+
+    const initialValues = {
+        editedItem: '',
+        dueDate: todo.completedBy
+    }
+    const [formValues, handleChange, clearForm] = useForm(initialValues);
     const [overdue, setOverdue] = useState(false);
     
     useEffect(() => {
     
-        if (todo.completedBy !== null && moment(todo.completedBy).format('LL') < moment(Date.now()).format('LL')){
+        if (todo.completedBy !== '' && moment(todo.completedBy).format('LL') < moment(Date.now()).format('LL')){
             console.log('Overdue');
             setOverdue(true);
         }
         if (todo.completed === true){
             setOverdue(false);
         }
-    }, [todo.completed])
+    }, [todo.completed, todo.completedBy])
     
     const editTodo = () => {
         setIsEditing(!isEditing);
@@ -54,8 +56,9 @@ export default function Todo(props) {
 
     const submitUpdate = (e)=> {
         e.preventDefault();
-        if (formValue !== ''){
-            dispatch(actions.editTodo(todo.id, formValue.editedItem));
+        console.log('formValues.dueDate', formValues.dueDate)
+        if (formValues.editedItem !== ''){
+            dispatch(actions.editTodo(todo.id, formValues.editedItem, formValues.dueDate || todo.completedBy));
             clearForm();
         }  
         setIsEditing(!isEditing);
@@ -66,9 +69,10 @@ export default function Todo(props) {
             <TodoItemH3 onClick={() => dispatch(actions.toggleComplete(todo.id))} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
             <OverdueP>{overdue? `This item is past due!`: null}</OverdueP>
             <CompletedDateP>{todo.completed? `Completed: ${moment(todo.dateCompleted).format('LL')}`: null}</CompletedDateP>
-            <DueDateP>{todo.completedBy !== null? `Due: ${moment(todo.completedBy).format('LL')}`: null}</DueDateP>
+            <DueDateP>{todo.completedBy !== ''? `Due: ${moment(todo.completedBy).format('LL')}`: null}</DueDateP>
             {isEditing? <div className='editTodo'>
-                    <Input type='text' name='editedItem' value={formValue.editedItem} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
+                    <Input type='text' name='editedItem' value={formValues.editedItem} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
+                    <input type='date' min={`${moment(new Date()).format('YYYY-MM-DD')}`} name='dueDate'value={formValues.dueDate} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
                     <Button onClick={submitUpdate}>Update</Button>
                 </div>: null}
             {!isEditing? <Button onClick={() => editTodo() }>Edit</Button>: null}

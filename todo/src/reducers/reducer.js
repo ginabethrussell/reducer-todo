@@ -3,36 +3,36 @@ import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_COMPLETE, CLEAR_TODO } from '.
 const initialState = { todos: [{
     item: 'Learn about reducers',
     completed: false,
-    completedBy: null,
-    dateCompleted: null,
+    completedBy: '',
+    dateCompleted: '',
     id: 3892987589
 },
 {
     item: 'Set up module project',
     completed: false,
-    completedBy: null,
-    dateCompleted: null,
+    completedBy: '',
+    dateCompleted: '',
     id: 3892987588
 },
 {
     item: 'Meet with my mentor',
     completed: false,
-    completedBy: null,
-    dateCompleted: null,
+    completedBy: '',
+    dateCompleted: '',
     id: 3892987587
 },
 {
     item: 'Meet with my mentee',
     completed: false,
-    completedBy: null,
-    dateCompleted: null,
+    completedBy: '',
+    dateCompleted: '',
     id: 3892987586
 },
 {
     item: 'Submit daily forms',
     completed: false,
-    completedBy: null,
-    dateCompleted: null,
+    completedBy: '',
+    dateCompleted: '',
     id: 3892987585
 }
 ]};
@@ -62,12 +62,17 @@ const reducer = (state, action) => {
             })};
         case(EDIT_TODO):
             const editedState = {...state};
-            return {editedState, todos: editedState.todos.map(item => {
-                if(item.id === action.payload.itemId) {
-                   return {...item, item: action.payload.editedItem}
-                };
-                return item;
-            })};
+            if (action.payload.editedItem !== ''){
+                return {editedState, todos: editedState.todos.map(item => {
+                    if(item.id === action.payload.itemId) {
+                       return {...item, item: action.payload.editedItem, completedBy: action.payload.completedBy}
+                    };
+                    return item;
+                })};
+            }else {
+                return state;
+            }
+            
         case(CLEAR_TODO):
             const clearedState = {...state};
             return {clearedState, todos: clearedState.todos.filter(item => {

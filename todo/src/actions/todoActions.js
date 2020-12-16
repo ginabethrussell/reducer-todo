@@ -19,8 +19,8 @@ export default {
     toggleComplete: (itemId) => {
         return ({ type: TOGGLE_COMPLETE, payload: itemId })
     },
-    editTodo: (itemId, editedItem) => {
-        return ({ type: EDIT_TODO, payload: {editedItem: editedItem, itemId: itemId}})
+    editTodo: (itemId, editedItem, dueDate) => {
+        return ({ type: EDIT_TODO, payload: {editedItem: editedItem, itemId: itemId, completedBy: dueDate}})
     },
     clearTodo: () => {
         return ({ type: CLEAR_TODO })
