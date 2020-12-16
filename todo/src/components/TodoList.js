@@ -3,7 +3,6 @@ import Todo from './Todo';
 
 export default function TodoList(props){
     const { todos, dispatch, actions} = props;
-    console.log('todolistcomponent',todos);
     
     return (
         <div className='todo-list-wrapper'>

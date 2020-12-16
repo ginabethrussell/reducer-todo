@@ -36,10 +36,9 @@ export default function Todo(props) {
         setIsEditing(!isEditing);
     }
    
-
     return (
         <TodoDiv>  
-            <TodoItemH3 onClick={() => dispatch(actions.completeTodo(todo.id))} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
+            <TodoItemH3 onClick={() => dispatch(actions.toggleComplete(todo.id))} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
             {isEditing? <div className='editTodo'>
                     <Input type='text' name='edit' value={formValue} onChange={(e) => handleChange(e.target.value)}/>
                     <Button onClick={submitUpdate}>Update</Button>

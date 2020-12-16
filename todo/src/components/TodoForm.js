@@ -21,6 +21,7 @@ export default function TodoForm(props) {
             clearForm();
         } 
     }
+    
     return(
         <form className='add-todo-form' onClick={submitTodo}>
             <TodoInput type='text'
