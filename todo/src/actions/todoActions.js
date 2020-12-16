@@ -9,9 +9,9 @@ export { ADD_TODO, DELETE_TODO, CLEAR_TODO, TOGGLE_COMPLETE, EDIT_TODO };
 
 // Create action creator functions with type and payload
 export default {
-    addTodo: (newItem) => {
+    addTodo: (newItem, dueDate) => {
         console.log('Adding todo', newItem);
-        return ({ type: ADD_TODO, payload: newItem })
+        return ({ type: ADD_TODO, payload: { item: newItem, date: dueDate } })
     },
     deleteTodo: (itemId) => {
         return ({ type: DELETE_TODO, payload: itemId })

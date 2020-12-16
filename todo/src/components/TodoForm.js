@@ -10,24 +10,34 @@ const AddButton = styled.button`
     font-size: 18px;  
 `;
 
+const initialFormValues = {
+    todo: '',
+    dueDate: ''
+}
 export default function TodoForm(props) {
-    const [formValue, handleChange, clearForm] = useForm();
+    const [formValues, handleChange, clearForm] = useForm(initialFormValues);
     const { dispatch, actions } = props;
 
     const submitTodo = (e) => {
         e.preventDefault();
-        if (formValue !== ''){
-            dispatch(actions.addTodo(formValue));
+        if (formValues.todo !== ''){
+            console.log(formValues)
+            dispatch(actions.addTodo(formValues.todo, formValues.dueDate));
             clearForm();
         } 
     }
-    
+    console.log(formValues);
     return(
-        <form className='add-todo-form' onClick={submitTodo}>
+        <form className='add-todo-form' onSubmit={submitTodo}>
             <TodoInput type='text'
             name='todo'
-            value={formValue}
-            onChange={(e) => handleChange(e.target.value)}
+            value={formValues.todo}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            />
+            <input type='date'
+            name='dueDate'
+            value={formValues.dueDate}
+            onChange={(e) => handleChange(e.target.name, e.target.value)}
             />
             <AddButton type='submit'>Add Todo</AddButton>
         </form>

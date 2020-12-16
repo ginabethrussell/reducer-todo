@@ -3,30 +3,35 @@ import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_COMPLETE, CLEAR_TODO } from '.
 const initialState = { todos: [{
     item: 'Learn about reducers',
     completed: false,
+    completedBy: null,
     dateCompleted: null,
     id: 3892987589
 },
 {
     item: 'Set up module project',
     completed: false,
+    completedBy: null,
     dateCompleted: null,
     id: 3892987588
 },
 {
     item: 'Meet with my mentor',
     completed: false,
+    completedBy: null,
     dateCompleted: null,
     id: 3892987587
 },
 {
     item: 'Meet with my mentee',
     completed: false,
+    completedBy: null,
     dateCompleted: null,
     id: 3892987586
 },
 {
     item: 'Submit daily forms',
     completed: false,
+    completedBy: null,
     dateCompleted: null,
     id: 3892987585
 }
@@ -37,8 +42,10 @@ const reducer = (state, action) => {
     switch (action.type) {
         case(ADD_TODO):
             const newTodo = {
-                item: action.payload,
+                item: action.payload.item,
                 completed: false,
+                completedBy: action.payload.date,
+                dateCompleted: null,
                 id: new Date()
             };
             return {...state, todos: [...state.todos, newTodo]};

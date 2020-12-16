@@ -1,15 +1,21 @@
 import { useState } from 'react';
 
-export default function useForm () {
-    const [formValue, setFormValue] = useState('');
+export default function useForm (initialFormValues) {
+    const [formValue, setFormValue] = useState(initialFormValues);
 
-    const handleChange = (newValue) => {
-        setFormValue(newValue);
+    const handleChange = (name, value) => {
+        console.log(name, value);
+        if (name === 'todo'){
+            setFormValue({...formValue, [name]: formValue[name] + value});
+        }else{
+            setFormValue({...formValue, [name]: value})
+        }
+        
     }
 
     const clearForm = () => {
-        setFormValue('');
+        setFormValue(initialFormValues);
     }
-    
+
     return [formValue, handleChange, clearForm];
 }
