@@ -27,9 +27,10 @@ export default function Todo(props) {
         setIsEditing(!isEditing);
     }
 
-    const submitUpdate = ()=> {
+    const submitUpdate = (e)=> {
+        e.preventDefault();
         if (formValue !== ''){
-            dispatch(actions.editTodos(todo.id, formValue));
+            dispatch(actions.editTodo(todo.id, formValue));
             clearForm();
         }  
         setIsEditing(!isEditing);

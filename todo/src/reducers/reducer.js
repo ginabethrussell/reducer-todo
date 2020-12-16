@@ -28,7 +28,7 @@ const initialState = { todos: [{
 ]};
 
 const reducer = (state, action) => {
-    console.log('reducing', state, action.type, action.payload)
+    // console.log('reducing', state, action.type, action.payload)
     switch (action.type) {
         case(ADD_TODO):
             const newTodo = {
@@ -37,29 +37,30 @@ const reducer = (state, action) => {
                 id: Date.now()
             };
             return {...state, todos: [...state.todos, newTodo]};
-
         case(DELETE_TODO):
-            const newState = {...state};
-            return {newState, todos: newState.todos.filter(todo => todo.id !== action.payload)};
-
+            const deletedState = {...state};
+            return {deletedState, todos: deletedState.todos.filter(todo => todo.id !== action.payload)};
         case(COMPLETE_TODO):
-            return state.todos.map(item => {
+            const completedState = {...state};
+            return {completedState, todos: completedState.todos.map(item => {
                 if(item.id === action.payload) {
                    return {...item, completed: !item.completed}
                 };
                 return item;
-            })
+            })};
         case(EDIT_TODO):
-            return state.todos.map(item => {
-                if(item.id === action.payload.todoId) {
-                   return {...item, item: action.payload.newItem}
+            const editedState = {...state};
+            return {editedState, todos: editedState.todos.map(item => {
+                if(item.id === action.payload.itemId) {
+                   return {...item, item: action.payload.editedItem}
                 };
                 return item;
-            });
+            })};
         case(CLEAR_TODO):
-            return state.todos.filter(item => {
-                return !item.completed
-            })
+            const clearedState = {...state};
+            return {clearedState, todos: clearedState.todos.filter(item => {
+                return !item.completed;
+            })};
         default:
           return state
       }

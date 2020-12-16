@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import { initialState, reducer } from './reducers/reducer';
 import actions from './actions/todoActions';
 import TodoList from './components/TodoList';
@@ -23,7 +23,7 @@ function App() {
       <TitleH1>ToDo List</TitleH1>
       <TodoForm dispatch={dispatch} actions={actions}/>
       <TodoList dispatch={dispatch} todos={state.todos} actions={actions}/>
-      <Button onClick=''>Clear Completed</Button>
+      <Button onClick={() => dispatch(actions.clearTodo())}>Clear Completed</Button>
     </div>
   );
 }
