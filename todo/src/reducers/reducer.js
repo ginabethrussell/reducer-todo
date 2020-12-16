@@ -3,26 +3,31 @@ import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_COMPLETE, CLEAR_TODO } from '.
 const initialState = { todos: [{
     item: 'Learn about reducers',
     completed: false,
+    dateCompleted: null,
     id: 3892987589
 },
 {
     item: 'Set up module project',
     completed: false,
+    dateCompleted: null,
     id: 3892987588
 },
 {
     item: 'Meet with my mentor',
     completed: false,
+    dateCompleted: null,
     id: 3892987587
 },
 {
     item: 'Meet with my mentee',
     completed: false,
+    dateCompleted: null,
     id: 3892987586
 },
 {
     item: 'Submit daily forms',
     completed: false,
+    dateCompleted: null,
     id: 3892987585
 }
 ]};
@@ -44,7 +49,7 @@ const reducer = (state, action) => {
             const completedState = {...state};
             return {completedState, todos: completedState.todos.map(item => {
                 if(item.id === action.payload) {
-                   return {...item, completed: !item.completed}
+                   return {...item, completed: !item.completed, dateCompleted: new Date()}
                 };
                 return item;
             })};

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import useForm from '../hooks/useForm';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const TodoDiv = styled.div`
     width: 85%;
@@ -17,6 +18,9 @@ const Button = styled.button`
 
 const Input = styled.input`
     font-size: 18px;`;
+
+const CompletedDateP = styled.p`
+    margin-right: 10px`;
 
 export default function Todo(props) {
     const { todo, dispatch, actions } = props;
@@ -39,6 +43,7 @@ export default function Todo(props) {
     return (
         <TodoDiv>  
             <TodoItemH3 onClick={() => dispatch(actions.toggleComplete(todo.id))} className={todo.completed ? 'strike-through' : null}>{todo.item}</TodoItemH3>
+            <CompletedDateP>{todo.completed? `Completed: ${moment(todo.dateCompleted).format('LL')}`: null}</CompletedDateP>
             {isEditing? <div className='editTodo'>
                     <Input type='text' name='edit' value={formValue} onChange={(e) => handleChange(e.target.value)}/>
                     <Button onClick={submitUpdate}>Update</Button>
