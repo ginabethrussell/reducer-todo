@@ -1,6 +1,6 @@
 import todoActions, { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, CLEAR_TODO } from '../actions/todoActions';
 
-const initialTodos = [{
+const initialState = { todos: [{
     item: 'Learn about reducers',
     completed: false,
     id: 3892987589
@@ -25,7 +25,7 @@ const initialTodos = [{
     completed: false,
     id: 3892987585
 }
-];
+]};
 
 const reducer = (state, action) => {
     console.log('reducing', state, action.type, action.payload)
@@ -36,7 +36,7 @@ const reducer = (state, action) => {
                 completed: false,
                 id: Date.now()
             };
-            return [...state, newTodo];
+            return [...state.todos, newTodo];
         case(DELETE_TODO):
             return state.filter(item => item.id != action.payload)
         case(COMPLETE_TODO):
@@ -63,4 +63,4 @@ const reducer = (state, action) => {
       }
 }
 
-export {initialTodos, reducer};
+export {initialState, reducer};

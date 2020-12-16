@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useReducer} from 'react';
-import { initialTodos, reducer } from './reducers/reducer';
+import { initialState, reducer } from './reducers/reducer';
 import actions from './actions/todoActions';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
@@ -16,7 +16,7 @@ const Button = styled.button`
   ;
   
 function App() {
-  const [todos, dispatch] = useReducer(reducer, initialTodos);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { addTodo, editTodo, clearTodo, completeTodo, deleteTodo } = actions;
 
 
@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <TitleH1>ToDo List</TitleH1>
       <TodoForm dispatch={dispatch} actions={actions}/>
-      <TodoList dispatch={dispatch} todos={todos} actions={actions}/>
+      <TodoList dispatch={dispatch} todos={state.todos} actions={actions}/>
       <Button onClick=''>Clear Completed</Button>
     </div>
   );
