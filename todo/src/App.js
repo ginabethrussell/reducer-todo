@@ -18,12 +18,12 @@ const TitleH1 = styled.h1`
   `;
 const ButtonDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: center;
+  width: 100%;
   `;
 const Button = styled.button`
   width: 200px;
-  margin-left: auto;
   font-size: 1.8rem;
   font-weight: normal;
   padding: 8px 8px;
