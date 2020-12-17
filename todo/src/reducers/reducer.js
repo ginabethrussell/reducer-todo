@@ -84,3 +84,5 @@ const reducer = (state, action) => {
 }
 
 export { initialState, reducer };
+
+// return {...state, todos: state.todos.filter(todo => todo.id !== action.payload)};

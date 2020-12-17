@@ -39,7 +39,9 @@ const Input = styled.input`
     font-size: 1.8rem;
     padding: 5px;
     border-radius: 5px;
-    margin: 5px;`;
+    margin: 5px;
+    background-color: #FAFAFA;
+    `;
 
 const CompletedDateP = styled.p`
     margin-right: 10px;

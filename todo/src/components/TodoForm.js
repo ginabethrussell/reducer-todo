@@ -15,6 +15,7 @@ const TodoInput = styled.input`
     padding: 8px;
     font-size: 1.8rem;
     margin-right: 16px;
+    background-color: #FAFAFA;
 `;
 
 const DateDiv = styled.div`
@@ -32,6 +33,7 @@ const DateInput = styled.input`
     padding: 5px;
     font-size: 1.8rem;
     margin-right: 8px;
+    background-color: #FAFAFA;
 `;
 const AddButton = styled.button`
     width: 125px;
@@ -44,6 +46,7 @@ const AddButton = styled.button`
     background-color: #FFF;
     color: #000;
     cursor: pointer;
+    background-color: #FAFAFA;
     ` ;
 
 
