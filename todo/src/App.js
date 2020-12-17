@@ -38,13 +38,19 @@ const Button = styled.button`
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   
+  const saveTodos = (e) => {
+    e.preventDefault();
+    window.localStorage.setItem('todos', JSON.stringify(state.todos) )
+  }
   return (
     <div className="App">
       <TitleH1>ToDo List</TitleH1>
       <TodoForm dispatch={dispatch} actions={actions}/>
       <TodoList dispatch={dispatch} todos={state.todos} actions={actions}/>
+      
       <ButtonDiv>
         <Button onClick={() => dispatch(actions.clearTodo())}>Clear Completed</Button>
+        <Button onClick={saveTodos}>Save Updates</Button>
       </ButtonDiv>
     </div>
   );

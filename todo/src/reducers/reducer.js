@@ -1,42 +1,51 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_COMPLETE, CLEAR_TODO } from '../actions/todoActions';
 
-const initialState = { todos: [{
-    item: 'Learn about reducers',
-    completed: false,
-    completedBy: '',
-    dateCompleted: '',
-    id: 3892987589
-},
-{
-    item: 'Set up module project',
-    completed: false,
-    completedBy: '',
-    dateCompleted: '',
-    id: 3892987588
-},
-{
-    item: 'Meet with my mentor',
-    completed: false,
-    completedBy: '',
-    dateCompleted: '',
-    id: 3892987587
-},
-{
-    item: 'Meet with my mentee',
-    completed: false,
-    completedBy: '',
-    dateCompleted: '',
-    id: 3892987586
-},
-{
-    item: 'Submit daily forms',
-    completed: false,
-    completedBy: '',
-    dateCompleted: '',
-    id: 3892987585
+function getInitialState() {
+    if (window.localStorage.getItem('todos') !== null){
+        const oldTodos = JSON.parse(window.localStorage.getItem('todos'));
+        console.log(oldTodos);
+        return { todos: oldTodos }
+    }else{
+         return { todos: [{
+                item: 'Learn about reducers',
+                completed: false,
+                completedBy: '',
+                dateCompleted: '',
+                id: 3892987589
+            },
+            {
+                item: 'Set up module project',
+                completed: false,
+                completedBy: '',
+                dateCompleted: '',
+                id: 3892987588
+            },
+            {
+                item: 'Meet with my mentor',
+                completed: false,
+                completedBy: '',
+                dateCompleted: '',
+                id: 3892987587
+            },
+            {
+                item: 'Meet with my mentee',
+                completed: false,
+                completedBy: '',
+                dateCompleted: '',
+                id: 3892987586
+            },
+            {
+                item: 'Submit daily forms',
+                completed: false,
+                completedBy: '',
+                dateCompleted: '',
+                id: 3892987585
+            }
+            ]};
+    }
 }
-]};
 
+const initialState = getInitialState();
 const reducer = (state, action) => {
     // console.log('reducing', state, action.type, action.payload)
     switch (action.type) {
