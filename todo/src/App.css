@@ -1,0 +1,10 @@
+.App {
+  width: 75%;
+  margin: 0 auto;
+  color: #141B41;
+}
+
+.strike-through {
+  text-decoration: line-through;
+}
+
